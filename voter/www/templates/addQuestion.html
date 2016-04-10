@@ -1,5 +1,23 @@
-<ion-view view-title="{{'addQuestion' | translate:'titles'}}">
+<ion-view view-title="{{'Add a New Question' | translate:'titles'}}">
   <ion-content>
-    <h1>Browse</h1>
+    <div class="container col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h2>{{'Your Question:' | translate:'labels'}}</h2> </div>
+      </div>
+      <div class="row">
+        <form ng-submit="addQuestion()">
+          <div class="input-group"> <input type="text" class="form-control" ng-model="addQuestionObj.questionInput" /> <span class="input-group-btn">
+                <button class="btn btn-default">{{'Submit' | translate:'labels'}}</button>
+              </span> </div>
+        </form>
+      </div>
+     <!--  <div class="row">
+        <div class="col-xs-12 text-center" id="toast-container"></div>
+         </div>
+       <div id="mytoast-container"> </div> 
+      </div> -->
+    </div>
+    <!-- </div> -->
   </ion-content>
 </ion-view>

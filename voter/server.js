@@ -11,6 +11,28 @@ var app = express()
 
 var httpServ = http.createServer(app)
 
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+
+
+app.use(express.static('www'))
+app.use(morgan("combined"))
+
+var router = express.Router()
+
+
+
+eval(fs.readFileSync('./modules/routes.js') + '');
+
+
+
+initRouter(router,app);
+
+
 var server = httpServ.listen(3000, function() {
 	var host = server.address()
 		.address;
@@ -18,17 +40,3 @@ var server = httpServ.listen(3000, function() {
 		.port;
 	console.log('app listening at http://%s:%s', host, port);
 });
-
-eval(fs.readFileSync('./modules/routerFuncs.js') + '');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-
-app.use(express.static('www'))
-app.use(morgan("combined"))
-
-var router = express.Router()
-
-initRouter(router,app);

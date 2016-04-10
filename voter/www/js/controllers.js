@@ -1,16 +1,20 @@
-angular.module('starter.controllers', [])
+var app = angular.module('starter.controllers', []);
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+
+app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, toastr) {
+
+  $rootScope.language = 'en'
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  // $scope.$on('$ionicView.enter', function(e) {
+  // });
 
   // Form data for the login modal
-  $scope.loginData = {};
+  //$scope.loginData = {};
 
   // Create the login modal that we will use later
   // $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -42,19 +46,62 @@ angular.module('starter.controllers', [])
 })
 
 .controller('promotablesCtrl', function($scope, $http) {
-  $http.get('/api/questions/promotables').then(function(res){
-    $scope.promotables = res.data;
+
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.getPromotableQuestions()
   });
+
+
+  $scope.getPromotableQuestions = function (){
+    $http.get('/api/questions/promotables').then(function(res){
+      $scope.promotables = res.data;
+    });
+  }
+    
 })
 
 
 .controller('votablesCtrl', function($scope, $http) {
-  $http.get('/api/questions/votables').then(function(res){
-    $scope.votables = res.data;
+
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.getVotableQuestions()
   });
+
+  $scope.getVotableQuestions = function (){
+    $http.get('/api/questions/votables').then(function(res){
+      $scope.votables = res.data;
+    });
+  }
+    
+})
+
+.controller('promotableQuestionCtrl', function($scope, $stateParams) {
+  var questionId = $stateParams.promotableId;
+  console.log('questionId',questionId);
 })
 
 .controller('votableQuestionCtrl', function($scope, $stateParams) {
   var questionId = $stateParams.votableId;
   console.log('questionId',questionId);
+})
+
+.controller('addQuestionCtrl', function($rootScope, $scope, $filter, toastr, apiService, errorService) {
+  $scope.addQuestionObj = {
+    questionInput : ''
+  }
+  $scope.addQuestion = function (question){
+    var question = $scope.addQuestionObj.questionInput;
+
+    apiService.postQuestion(question).then(function(res){
+      console.log('Question added, response:',res);
+      toastr.success($filter('translate')('Question added successfully.','toasts',$rootScope.language));
+      $scope.addQuestionObj.questionInput = '';   //clears input in view
+    },
+    function(err){
+      errorService.dealWithError(err)
+    })
+
+    
+  }
 });
+

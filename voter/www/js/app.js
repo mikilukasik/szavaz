@@ -3,9 +3,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'toastr']);
 
-.run(function($ionicPlatform) {
+
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,29 +22,49 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 })
 
-.filter('translate', function() {
-  return function(input, type) {
-   
-    var translations = {
-      labels: {
-        addQuestion: 'Add Question',
-        promoteQuestion: 'Promote Question',
-        vote: 'Vote'
-      },
-      titles: {
-        addQuestion: 'Add a New Question',
-        promoteQuestion: 'Questions Available for Promoting',
-        // vote: 'Vote',
-        votables: 'Questions Available for Voting'
-      }
-    };
+.filter('translate', function($rootScope) {
+  return function(input, type, lang) {
 
-    return translations[type][input]
+    return translations[$rootScope.language][type][input]
 
   }
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.factory('apiService', function($http){
+  return {
+    postQuestion: function(question){
+      console.log('Attempting to post question: ',question)
+      var req = {
+        method: 'POST',
+        url: '/api/questions',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          question: question
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+
+    }
+  }
+})
+
+
+.factory('errorService', function($http){
+  return {
+    dealWithError: function(err){
+
+     console.log('silentError:',err)
+
+    }
+  }
+})
+
+
+.config(function($stateProvider, $urlRouterProvider, toastrConfig) {
   $stateProvider
 
     .state('app', {
@@ -57,7 +78,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/addQuestion',
     views: {
       'menuContent': {
-        templateUrl: 'templates/addQuestion.html'
+        templateUrl: 'templates/addQuestion.html',
+        controller: 'addQuestionCtrl'
       }
     }
   })
@@ -66,8 +88,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/promoteQuestion',
     views: {
       'menuContent': {
-        templateUrl: 'templates/promoteQuestion.html',
+        templateUrl: 'templates/promotables.html',
         controller: 'promotablesCtrl'
+      }
+    }
+  })
+
+  .state('app.promotable', {
+    url: '/promotables/:promotableId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/promotableQuestion.html',
+        controller: 'promotableQuestionCtrl'
       }
     }
   })
@@ -93,4 +125,37 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/votables');
+
+
+  angular.extend(toastrConfig, {
+    autoDismiss: false,
+    containerId: 'toast-container',
+    maxOpened: 0,    
+    newestOnTop: true,
+    positionClass: 'toast-top-center',
+    preventDuplicates: false,
+    preventOpenDuplicates: false,
+    target: 'body'
+  });
+
+
+
+
+// app.config(function(toastrConfig) {
+//   angular.extend(toastrConfig, {
+//     autoDismiss: false,
+//     containerId: 'toast-container',
+//     maxOpened: 0,    
+//     newestOnTop: true,
+//     positionClass: 'toast-bottom-center',
+//     preventDuplicates: false,
+//     preventOpenDuplicates: false,
+//     target: 'body'
+//   });
+// })
+
+
+
+
+
 });
