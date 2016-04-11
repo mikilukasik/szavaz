@@ -49,6 +49,9 @@ var initRouter = function(router, app) {
             }, function(question) {
               question.promoteUp--
               question.promoteDown++
+              res.json({
+                result: 'Promotion changed to negative.'
+              })
             })
           }
         } else {
@@ -61,6 +64,9 @@ var initRouter = function(router, app) {
             }, function(question) {
               question.promoteUp++
               question.promoteDown--
+              res.json({
+                result: 'Promotion changed to positive.'
+              })
             })
           } else {
             res.json({
@@ -79,8 +85,14 @@ var initRouter = function(router, app) {
         }, function(question) {
           if (promoting) {
             question.promoteUp++
+            res.json({
+              result: 'Positive promotion registered.'
+            })
           } else {
             question.promoteDown++
+            res.json({
+              result: 'Negative promotion registered.'
+            })
           }
         })
       }
@@ -112,6 +124,9 @@ var initRouter = function(router, app) {
             }, function(question) {
               question.voteUp--
               question.voteDown++
+              res.json({
+                result: 'Vote changed to negative.'
+              })
             })
           }
         } else {
@@ -124,6 +139,9 @@ var initRouter = function(router, app) {
             }, function(question) {
               question.voteUp++
               question.voteDown--
+              res.json({
+                result: 'Vote changed to positive.'
+              })
             })
           } else {
             res.json({
@@ -142,8 +160,14 @@ var initRouter = function(router, app) {
         }, function(question) {
           if (voting) {
             question.voteUp++
+            res.json({
+              result: 'Positive vote registered.'
+            })
           } else {
             question.voteDown++
+            res.json({
+              result: 'Negative vote registered.'
+            })
           }
         })
       }
