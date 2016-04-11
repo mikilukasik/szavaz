@@ -17,7 +17,12 @@ var translations = {
     },
     labels: {
       'Your Question:': 'Your Question:',
-      'Submit': 'Submit'
+      'Submit': 'Submit',
+      'Question:': 'Question:',
+      'YES': 'YES',
+      'NO': 'NO',
+      'UP': 'UP',
+      'DOWN': 'DOWN'
     },
     toasts: {
       'Question added successfully.': 'Question added successfully.'

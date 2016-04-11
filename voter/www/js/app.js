@@ -32,8 +32,8 @@ app.run(function($ionicPlatform) {
 
 .factory('apiService', function($http){
   return {
+
     postQuestion: function(question){
-      console.log('Attempting to post question: ',question)
       var req = {
         method: 'POST',
         url: '/api/questions',
@@ -48,6 +48,50 @@ app.run(function($ionicPlatform) {
         return res.data;
       });
 
+    },
+
+    
+    postPromotion: function(promotion){
+      var req = {
+        method: 'POST',
+        url: '/api/promotions',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: promotion
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+
+    },
+
+    getQuestion: function(questionId){
+      var req = {
+        method: 'GET',
+        url: '/api/questions/' + questionId, 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+
+    },
+
+
+    getClientMongoId: function(hardWareId){
+      var req = {
+        method: 'GET',
+        url: '/api/client-mongo-id/' + hardWareId,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
     }
   }
 })

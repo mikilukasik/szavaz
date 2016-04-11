@@ -1,5 +1,23 @@
 <ion-view view-title="{{'Vote' | translate:'titles'}}">
   <ion-content>
-    <h1>...</h1>
+    <div class="container-fluid container-table col-xs-12">
+      <!-- <div class="row vertical-center-row"> -->
+      <div class="text-center col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="text-center col-xs-8 col-xs-offset-2">
+            <h1><strong>{{'Question:' | translate:'labels'}}</strong></h1> </div>
+        </div>
+        <div class="row">
+          <div class="text-center col-xs-8 col-xs-offset-2">
+            <h2>{{question.question}}</h2> </div>
+        </div>
+        <div class="row" style="height:2em"> </div>
+        <div class="row" style="height:4em">
+          <div class="text-center col-xs-4 col-xs-offset-2" style="background:white"> <button type="button" class="btn btn-danger" ng-click="vote.down(question)"><span class="glyphicon glyphicon-arrow-down"> {{'YES' | translate:'labels'}}</button> </div>
+          <div class="text-center col-xs-4 col-xs-offset-0" style="background:white"> <button type="button" class="btn btn-success" ng-click="vote.up(question)"><span class="glyphicon glyphicon-arrow-up"> {{'NO' | translate:'labels'}}</button> </div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
   </ion-content>
 </ion-view>
