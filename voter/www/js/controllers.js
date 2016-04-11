@@ -7,7 +7,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
   
 
   $rootScope.language = 'en';
-  var hardWareId = 'tempId';
+  var hardWareId = Math.random()// 'tempId';
 
   var setCookie = function(cname, cvalue, exdays) {
     var d = new Date();
