@@ -22,7 +22,8 @@ var translations = {
       'YES': 'YES',
       'NO': 'NO',
       'UP': 'UP',
-      'DOWN': 'DOWN'
+      'DOWN': 'DOWN',
+      'ESCALATE': 'ESCALATE'
     },
     toasts: {
       'Question added successfully.': 'Question added successfully.'

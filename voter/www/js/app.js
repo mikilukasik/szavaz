@@ -66,6 +66,36 @@ app.run(function($ionicPlatform) {
 
     },
 
+    escalateQuestion: function(questionId){
+      var req = {
+        method: 'PUT',
+        url: '/api/questions/' + questionId, 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+
+    },
+
+
+    postVote: function(vote){
+      var req = {
+        method: 'POST',
+        url: '/api/votes',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: vote
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+
+    },
+
     getQuestion: function(questionId){
       var req = {
         method: 'GET',
@@ -85,6 +115,19 @@ app.run(function($ionicPlatform) {
       var req = {
         method: 'GET',
         url: '/api/client-mongo-id/' + hardWareId,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+    },
+
+    postClientMongoId: function(clientMongoId){
+      var req = {
+        method: 'GET',
+        url: '/api/client-mongo-id/' + clientMongoId,
         headers: {
           'Content-Type': 'application/json'
         }

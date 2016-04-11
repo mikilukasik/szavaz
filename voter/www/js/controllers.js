@@ -27,7 +27,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
     return "";
   }
 
-  $rootScope.clientMongoId = getCookie("clientMongoId");
+  $rootScope.clientMongoId = getCookie("clientId");
 
   $scope.setClientMongoID = function(clientMongoId) {
     
@@ -36,14 +36,21 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
   if($rootScope.clientMongoId === ''){
     console.log('no clientMongoId, requesting...');
     apiService.getClientMongoId(hardWareId).then(function(res){
-      setCookie("clientMongoId", res.clientMongoId, 365);
+      setCookie("clientId", res.clientMongoId, 365);
       $rootScope.clientMongoId = res.clientMongoId;
       console.log('clientMongoId received',$rootScope.clientMongoId);
     },function(err){
       errorService.dealWithError(err);
     })
   } else {
-    console.log('clientMongoId from cookie',$rootScope.clientMongoId);
+    console.log('clientMongoId from cookie, checking',$rootScope.clientMongoId);
+    apiService.postClientMongoId($rootScope.clientMongoId).then(function(res){
+      // setCookie("clientMongoId", res.clientMongoId, 365);
+      // $rootScope.clientMongoId = res.clientMongoId;
+      // console.log('clientMongoId received',$rootScope.clientMongoId);
+    },function(err){
+      errorService.dealWithError(err);
+    })
   }
 
 
@@ -150,12 +157,19 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
       },function(err){
         errorService.dealWithError(err);
       })
+    },
+    escalate: function (question) {
+      apiService.escalateQuestion(question._id).then(function(res){
+        console.log(res)
+      },function(err){
+        errorService.dealWithError(err);
+      })
     }
   }
 
 })
 
-.controller('votableQuestionCtrl', function($scope, $stateParams, apiService, errorService) {
+.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams, apiService, errorService) {
   $scope.questionId = $stateParams.votableId;
   console.log('$scope.questionId',$stateParams.votableId);
 
@@ -165,6 +179,31 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
   },function(err){
     errorService.dealWithError(err);
   })
+
+  $scope.vote = {
+    up: function (question) {
+      apiService.postVote({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        voting: true
+      }).then(function(res){
+        console.log(res)
+      },function(err){
+        errorService.dealWithError(err);
+      })
+    },
+    down: function (question) {
+      apiService.postVote({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        voting: false
+      }).then(function(res){
+        console.log(res)
+      },function(err){
+        errorService.dealWithError(err);
+      })
+    }
+  }
 
 })
 
