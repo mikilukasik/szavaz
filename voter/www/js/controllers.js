@@ -2,9 +2,7 @@ var app = angular.module('starter.controllers', []);
 
 
 
-app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, apiService, toastr, errorService) {
-
-  
+app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService) {
 
   $rootScope.language = 'en';
   var hardWareId = Math.random()// 'tempId';
@@ -94,7 +92,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
   // };
 })
 
-.controller('promotablesCtrl', function($scope, $http) {
+.controller('promotablesCtrl', function($rootScope, $scope, $http) {
 
   $scope.$on('$ionicView.enter', function(e) {
     $scope.getPromotableQuestions()
@@ -102,23 +100,33 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
 
 
   $scope.getPromotableQuestions = function (){
+    $rootScope.spinIt = true;
     $http.get('/api/questions/promotables').then(function(res){
+      $rootScope.spinIt = false;
       $scope.promotables = res.data;
+    },function(err){
+      $rootScope.spinIt = false;
+      errorService.dealWithError(err);
     });
   }
     
 })
 
 
-.controller('votablesCtrl', function($scope, $http) {
+.controller('votablesCtrl', function($rootScope, $scope, $http) {
 
   $scope.$on('$ionicView.enter', function(e) {
     $scope.getVotableQuestions()
   });
 
   $scope.getVotableQuestions = function (){
+    $rootScope.spinIt = true;
     $http.get('/api/questions/votables').then(function(res){
+      $rootScope.spinIt = false;
       $scope.votables = res.data;
+    },function(err){
+      $rootScope.spinIt = false;
+      errorService.dealWithError(err);
     });
   }
     
@@ -127,41 +135,52 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
 .controller('promotableQuestionCtrl', function($rootScope, $scope, $stateParams, apiService, errorService) {
   $scope.questionId = $stateParams.promotableId;
   console.log('$scope.questionId',$stateParams.promotableId);
-
+  $rootScope.spinIt = true;
   apiService.getQuestion($scope.questionId).then(function(question){
+    $rootScope.spinIt = false;
     console.log('question received',question)
     $scope.question = question;
   },function(err){
     errorService.dealWithError(err);
+    $rootScope.spinIt = false;
   })
 
   $scope.promote = {
     up: function (question) {
+      $rootScope.spinIt = true;
       apiService.postPromotion({
         clientMongoId: $rootScope.clientMongoId,
         questionId: question._id,
         promoting: true
       }).then(function(res){
+        $rootScope.spinIt = false;
         console.log(res)
       },function(err){
+        $rootScope.spinIt = false;
         errorService.dealWithError(err);
       })
     },
     down: function (question) {
+      $rootScope.spinIt = true;
       apiService.postPromotion({
         clientMongoId: $rootScope.clientMongoId,
         questionId: question._id,
         promoting: false
       }).then(function(res){
+        $rootScope.spinIt = false;
         console.log(res)
       },function(err){
+        $rootScope.spinIt = false;
         errorService.dealWithError(err);
       })
     },
     escalate: function (question) {
+      $rootScope.spinIt = true;
       apiService.escalateQuestion(question._id).then(function(res){
+        $rootScope.spinIt = false;
         console.log(res)
       },function(err){
+        $rootScope.spinIt = false;
         errorService.dealWithError(err);
       })
     }
@@ -173,33 +192,42 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
   $scope.questionId = $stateParams.votableId;
   console.log('$scope.questionId',$stateParams.votableId);
 
+  $rootScope.spinIt = true;
   apiService.getQuestion($scope.questionId).then(function(question){
+    $rootScope.spinIt = false;
     console.log('question received',question)
     $scope.question = question;
   },function(err){
+    $rootScope.spinIt = false;
     errorService.dealWithError(err);
   })
 
   $scope.vote = {
     up: function (question) {
+      $rootScope.spinIt = true;
       apiService.postVote({
         clientMongoId: $rootScope.clientMongoId,
         questionId: question._id,
         voting: true
       }).then(function(res){
+        $rootScope.spinIt = false;
         console.log(res)
       },function(err){
+        $rootScope.spinIt = false;
         errorService.dealWithError(err);
       })
     },
     down: function (question) {
+      $rootScope.spinIt = true;
       apiService.postVote({
         clientMongoId: $rootScope.clientMongoId,
         questionId: question._id,
         voting: false
       }).then(function(res){
+        $rootScope.spinIt = false;
         console.log(res)
       },function(err){
+        $rootScope.spinIt = false;
         errorService.dealWithError(err);
       })
     }
@@ -214,13 +242,16 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, ap
   $scope.addQuestion = function (){
     $scope.question = $scope.addQuestionObj.questionInput;
 
+    $rootScope.spinIt = true;
     apiService.postQuestion($scope.addQuestionObj.questionInput).then(function(res){
+      $rootScope.spinIt = false;
       console.log('Question added, response:',res);
       toastr.success($filter('translate')('Question added successfully.','toasts',$rootScope.language));
       $scope.addQuestionObj.questionInput = '';   //clears input in view
     },
     function(err){
-      errorService.dealWithError(err)
+      $rootScope.spinIt = false;
+      errorService.dealWithError(err);
     })
 
     

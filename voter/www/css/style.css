@@ -1,1 +1,17 @@
 /* Empty. Add your own CSS if you like */
+div.spinner {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 100%;
+  text-align: center;
+  background: black;
+  opacity:0.30;
+}
+
+.spinner svg {
+	margin: 15vw;
+  width: 19% !important;
+  height: 85px !important;
+
+}

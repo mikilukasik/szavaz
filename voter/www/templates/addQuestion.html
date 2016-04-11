@@ -1,6 +1,7 @@
 <ion-view view-title="{{'Add a New Question' | translate:'titles'}}">
   <ion-content>
     <div class="container col-xs-12">
+    <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
       <div class="row">
         <div class="col-xs-12 text-center">
           <h2>{{'Your Question:' | translate:'labels'}}</h2> </div>

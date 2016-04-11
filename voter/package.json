@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "voter: An Ionic project",
   "dependencies": {
+    "angular-spinner": "^0.8.1",
     "angular-toastr": "^1.7.0",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",

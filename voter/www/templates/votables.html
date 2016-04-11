@@ -1,5 +1,6 @@
 <ion-view view-title="{{'Questions Available for Voting' | translate:'titles'}}">
   <ion-content>
+  <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
     <ion-list>
       <ion-item ng-repeat="votable in votables" href="#/app/votables/{{votable._id}}">
         <div class="container col-xs-12">
