@@ -3,7 +3,8 @@ var translations = {
     menu: {
       'Add Question': 'Add Question',
       'Promote Question': 'Promote Question',
-      'Vote': 'Vote'
+      'Vote': 'Vote',
+      'Login': 'Login'
     },
     titles: {
       'Add a New Question': 'Add a New Question',
