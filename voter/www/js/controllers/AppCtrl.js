@@ -1,5 +1,8 @@
 app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService) {
-  $rootScope.language = 'en';
+
+  $rootScope.language = preferredLanguage;
+
+
   var hardWareId = Math.random() // 'tempId';
   var setCookie = function(cname, cvalue, exdays) {
     var d = new Date();

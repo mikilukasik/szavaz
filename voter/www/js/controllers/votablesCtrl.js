@@ -1,12 +1,12 @@
-app.controller('votablesCtrl', function($rootScope, $scope, $http) {
+app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, errorService) {
   $scope.$on('$ionicView.enter', function(e) {
     $scope.getVotableQuestions()
   });
   $scope.getVotableQuestions = function() {
     $rootScope.spinIt = true;
-    $http.get('/api/questions/votables').then(function(res) {
+    apiService.getVotables().then(function(res) {
       $rootScope.spinIt = false;
-      $scope.votables = res.data;
+      $scope.votables = res;
     }, function(err) {
       $rootScope.spinIt = false;
       errorService.dealWithError(err);

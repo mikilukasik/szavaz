@@ -1,9 +1,10 @@
-app.factory('apiService', function($http) {
+app.factory('apiService', function($http, $filter) {
   return {
     postQuestion: function(question) {
       var req = {
         method: 'POST',
-        url: '/api/questions',
+        url: apiServer.host + '/api/questions',
+        port: apiServer.port,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -53,6 +54,19 @@ app.factory('apiService', function($http) {
         return res.data;
       });
     },
+    getVotables: function() {
+      var req = {
+        method: 'GET',
+        url: $filter('trustedUrl')(apiServer.host + ':' + apiServer.port + '/api/questions/votables'),
+       
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+    },
     getQuestion: function(questionId) {
       var req = {
         method: 'GET',
@@ -68,7 +82,7 @@ app.factory('apiService', function($http) {
     getClientMongoId: function(hardWareId) {
       var req = {
         method: 'GET',
-        url: '/api/client-mongo-id/' + hardWareId,
+        url: apiServer.host + ':' + apiServer.port + '/api/client-mongo-id/' + hardWareId,
         headers: {
           'Content-Type': 'application/json'
         }

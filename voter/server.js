@@ -4,6 +4,8 @@ var bodyParser = require("body-parser");
 var fs = require('fs');
 
 var http = require('http')
+var cors = require('cors')
+
 
 var dbFuncs = require('./modules/dbFuncs.js')
 dbFuncs.connect('mongodb://localhost:17890/voterdb')
@@ -17,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-
+app.use(cors())
 
 app.use(express.static('www'))
 app.use(morgan("combined"))
