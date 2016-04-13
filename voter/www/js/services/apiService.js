@@ -3,8 +3,8 @@ app.factory('apiService', function($http, $filter) {
     postQuestion: function(question) {
       var req = {
         method: 'POST',
-        url: apiServer.host + '/api/questions',
-        port: apiServer.port,
+        url: apiServer.host + ':' + apiServer.port +  '/api/questions',
+      
         headers: {
           'Content-Type': 'application/json'
         },
@@ -19,7 +19,7 @@ app.factory('apiService', function($http, $filter) {
     postPromotion: function(promotion) {
       var req = {
         method: 'POST',
-        url: '/api/promotions',
+        url: apiServer.host + ':' + apiServer.port + '/api/promotions',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -32,7 +32,7 @@ app.factory('apiService', function($http, $filter) {
     escalateQuestion: function(questionId) {
       var req = {
         method: 'PUT',
-        url: '/api/questions/' + questionId,
+        url: apiServer.host + ':' + apiServer.port + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -44,7 +44,7 @@ app.factory('apiService', function($http, $filter) {
     postVote: function(vote) {
       var req = {
         method: 'POST',
-        url: '/api/votes',
+        url: apiServer.host + ':' + apiServer.port + '/api/votes',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -57,7 +57,7 @@ app.factory('apiService', function($http, $filter) {
     getVotables: function() {
       var req = {
         method: 'GET',
-        url: $filter('trustedUrl')(apiServer.host + ':' + apiServer.port + '/api/questions/votables'),
+        url: apiServer.host + ':' + apiServer.port + '/api/questions/votables',
        
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ app.factory('apiService', function($http, $filter) {
     getQuestion: function(questionId) {
       var req = {
         method: 'GET',
-        url: '/api/questions/' + questionId,
+        url: apiServer.host + ':' + apiServer.port + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -94,7 +94,7 @@ app.factory('apiService', function($http, $filter) {
     postClientMongoId: function(clientMongoId) {
       var req = {
         method: 'GET',
-        url: '/api/client-mongo-id/' + clientMongoId,
+        url: apiServer.host + ':' + apiServer.port + '/api/client-mongo-id/' + clientMongoId,
         headers: {
           'Content-Type': 'application/json'
         }

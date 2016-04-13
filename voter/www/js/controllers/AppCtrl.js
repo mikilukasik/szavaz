@@ -1,6 +1,61 @@
-app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService) {
+app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService, $cordovaGeolocation) {
 
   $rootScope.language = preferredLanguage;
+
+
+  // var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  // $cordovaGeolocation
+  //   .getCurrentPosition(posOptions)
+  //   .then(function (position) {
+  //     var lat  = position.coords.latitude
+  //     var long = position.coords.longitude
+
+  //     console.log('inside getCurrentPosition',lat,long)
+  //   }, function(err) {
+  //     // error
+  //   });
+
+
+  var watchOptions = {
+    timeout : 3000,
+    enableHighAccuracy: false // may cause errors if true
+  };
+
+  var watch = $cordovaGeolocation.watchPosition(watchOptions);
+  watch.then(
+    null,
+    function(err) {
+      // error
+    },
+    function(position) {
+      $rootScope.myPosition = {
+        lat : position.coords.latitude,
+        long : position.coords.longitude
+      }
+      console.log('$rootScope.myPosition updated',$rootScope.myPosition)
+  });
+
+    // console.log('geoCtrl ran.')
+
+  // watch.clearWatch();
+  // // OR
+  // $cordovaGeolocation.clearWatch(watch)
+  //   .then(function(result) {
+  //     // success
+  //     }, function (error) {
+  //     // error
+  //   });
+
+
+
+
+
+
+
+
+
+
+
 
 
   var hardWareId = Math.random() // 'tempId';
