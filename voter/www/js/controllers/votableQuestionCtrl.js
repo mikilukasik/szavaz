@@ -1,10 +1,10 @@
 app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams, apiService, errorService) {
   $scope.questionId = $stateParams.votableId;
-  console.log('$scope.questionId', $stateParams.votableId);
+  $rootScope.toConsole('$scope.questionId', $stateParams.votableId);
   $rootScope.spinIt = true;
   apiService.getQuestion($scope.questionId).then(function(question) {
     $rootScope.spinIt = false;
-    console.log('question received', question)
+    $rootScope.toConsole('question received', question)
     $scope.question = question;
   }, function(err) {
     $rootScope.spinIt = false;
@@ -19,7 +19,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
         voting: true
       }).then(function(res) {
         $rootScope.spinIt = false;
-        console.log(res)
+        $rootScope.toConsole(res)
       }, function(err) {
         $rootScope.spinIt = false;
         errorService.dealWithError(err);
@@ -33,7 +33,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
         voting: false
       }).then(function(res) {
         $rootScope.spinIt = false;
-        console.log(res)
+        $rootScope.toConsole(res)
       }, function(err) {
         $rootScope.spinIt = false;
         errorService.dealWithError(err);

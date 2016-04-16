@@ -1,10 +1,10 @@
 app.controller('promotableQuestionCtrl', function($rootScope, $scope, $stateParams, apiService, errorService) {
   $scope.questionId = $stateParams.promotableId;
-  console.log('$scope.questionId', $stateParams.promotableId);
+  $rootScope.toConsole('$scope.questionId', $stateParams.promotableId);
   $rootScope.spinIt = true;
   apiService.getQuestion($scope.questionId).then(function(question) {
     $rootScope.spinIt = false;
-    console.log('question received', question)
+    $rootScope.toConsole('question received', question)
     $scope.question = question;
   }, function(err) {
     errorService.dealWithError(err);
@@ -19,7 +19,7 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
         promoting: true
       }).then(function(res) {
         $rootScope.spinIt = false;
-        console.log(res)
+        $rootScope.toConsole(res)
       }, function(err) {
         $rootScope.spinIt = false;
         errorService.dealWithError(err);
@@ -33,7 +33,7 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
         promoting: false
       }).then(function(res) {
         $rootScope.spinIt = false;
-        console.log(res)
+        $rootScope.toConsole(res)
       }, function(err) {
         $rootScope.spinIt = false;
         errorService.dealWithError(err);
@@ -43,7 +43,7 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
       $rootScope.spinIt = true;
       apiService.escalateQuestion(question._id).then(function(res) {
         $rootScope.spinIt = false;
-        console.log(res)
+        $rootScope.toConsole(res)
       }, function(err) {
         $rootScope.spinIt = false;
         errorService.dealWithError(err);

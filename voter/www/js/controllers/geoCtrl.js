@@ -1,4 +1,4 @@
-app.controller('geoCtrl', function($cordovaGeolocation) {
+app.controller('geoCtrl', function($cordovaGeolocation, $rootScope) {
 
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
   $cordovaGeolocation
@@ -7,7 +7,7 @@ app.controller('geoCtrl', function($cordovaGeolocation) {
       var lat  = position.coords.latitude
       var long = position.coords.longitude
 
-      console.log('inside getCurrentPosition',lat,long)
+      $rootScope.toConsole('inside getCurrentPosition',lat,long)
     }, function(err) {
       // error
     });
@@ -27,10 +27,10 @@ app.controller('geoCtrl', function($cordovaGeolocation) {
     function(position) {
       var lat  = position.coords.latitude
       var long = position.coords.longitude
-      console.log('inside watchPosition',lat,long)
+      $rootScope.toConsole('inside watchPosition',lat,long)
   });
 
-    console.log('geoCtrl ran.')
+    $rootScope.toConsole('geoCtrl ran.')
 
   // watch.clearWatch();
   // // OR

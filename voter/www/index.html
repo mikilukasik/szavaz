@@ -6,23 +6,20 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>
     <title>youVote</title>
 
+    <script type="text/javascript">
+        var indexGlobals = {
+            appStarted : new Date()
+        };
+    </script>
+
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    
-
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="js/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
 
-    <!-- bootstrap, http://www.w3schools.com/bootstrap/ -->     
+    <!-- bootstrap, http://www.w3schools.com/bootstrap/      -->
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap/bootstrap.min.js"></script>
@@ -31,30 +28,36 @@
     <link rel="stylesheet" type="text/css" href="lib/toastr/angular-toastr.css" />
     <script type="text/javascript" src="lib/toastr/angular-toastr.tpls.js"></script>
 
-    <!-- your app's js -->
-    <script src="js/lang.js"></script>
 
-    <script src="js/raw.js"></script>
-    
     <script src="js/app.js"></script>
-    <script src="js/appConfig.js"></script>
-    
-    <script src="js/filters/translateFilter.js"></script>
-    <script src="js/filters/trustedUrlFilter.js"></script>
 
-    <script src="js/services/apiService.js"></script>
-    <script src="js/services/errorService.js"></script>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- endinject -->
+
+    <!-- inject:js -->    
+    <script src="js/appConfig.js"></script>    
+    <script src="js/controllers.js"></script>    
+    <script src="js/lang.js"></script>    
+    <script src="js/ng-cordova.min.js"></script>    
+    <script src="js/raw.js"></script>    
+    <script src="js/controllers/AppCtrl.js"></script>    
+    <script src="js/controllers/addQuestionCtrl.js"></script>    
+    <script src="js/controllers/developerCtrl.js"></script>    
+    <script src="js/controllers/geoCtrl.js"></script>    
+    <script src="js/controllers/promotableQuestionCtrl.js"></script>    
+    <script src="js/controllers/promotablesCtrl.js"></script>    
+    <script src="js/controllers/votableQuestionCtrl.js"></script>    
+    <script src="js/controllers/votablesCtrl.js"></script>    
+    <script src="js/filters/translateFilter.js"></script>    
+    <script src="js/filters/trustedUrlFilter.js"></script>    
+    <script src="js/filters/trutedUrlFilter.js"></script>    
+    <script src="js/services/apiService.js"></script>    
+    <script src="js/services/errorService.js"></script>    
+    <!-- endinject -->
+
     
-    <script src="js/controllers.js"></script>
-    <script src="js/controllers/AppCtrl.js"></script>
-    <script src="js/controllers/geoCtrl.js"></script>
-    <script src="js/controllers/addQuestionCtrl.js"></script>
-    <script src="js/controllers/votablesCtrl.js"></script>
-    <script src="js/controllers/promotablesCtrl.js"></script>
-    <script src="js/controllers/votableQuestionCtrl.js"></script>
-    <script src="js/controllers/promotableQuestionCtrl.js"></script>
-    
-    
+   
     
     
     

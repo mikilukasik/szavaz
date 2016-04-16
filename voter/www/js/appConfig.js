@@ -42,6 +42,15 @@ app.config(function($stateProvider, $urlRouterProvider, toastrConfig) {
       }
     }
   })
+  .state('app.developer', {
+    url: '/developer',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/developer.html',
+        controller: 'developerCtrl'
+      }
+    }
+  })
   .state('app.votable', {
     url: '/votables/:votableId',
     views: {

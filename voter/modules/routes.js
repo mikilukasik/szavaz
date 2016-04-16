@@ -174,21 +174,58 @@ var initRouter = function(router, app) {
     })
   });
   router.route('/client-mongo-id/:hardWareId').get(function(req, res) {
-    //TODO: replace this function with real one//
-    dbFuncs.update('clients', {
-      hardWareId: req.params.hardWareId
+
+    var hardWareId = req.params.hardWareId;
+
+    if(hardWareId === 'newBrowser'){
+      hardWareId = 'some browser ' + Math.random();
+    };
+
+    dbFuncs.findOne('clients', {
+      hardWareId: hardWareId
     }, function(myRecord) {
       if (!myRecord) {
+
+          //new client
         dbFuncs.insert('clients', {
+
           hardWareId: req.params.hardWareId,
           promotions: [],
-          votes: []
+          votes: [],
+          preferences: {
+
+          },
+
+
         }, function(myNewRecord) {
           res.json({
             clientMongoId: myNewRecord._id
           })
         })
       } else {
+        console.log('known client',myRecord)
+        //known client
+        res.json({
+          clientMongoId: myRecord._id
+        })
+      }
+    })
+  });
+
+  router.route('/client-mongo-id/:clientMongoId').put(function(req, res) {
+
+    var clientMongoId = req.params.clientMongoId;
+
+    dbFuncs.findOne('clients', {
+      _id: new dbFuncs.ObjectID(clientMongoId)
+    }, function(myRecord) {
+      if (!myRecord) {
+        //send res error
+        res.status(500).send('Unknown clientMongoId, please send hardWareId');
+       
+      } else {
+        console.log('known client checking in..',myRecord)
+        //known client
         res.json({
           clientMongoId: myRecord._id
         })

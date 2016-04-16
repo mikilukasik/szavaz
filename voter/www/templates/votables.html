@@ -2,9 +2,12 @@
   <ion-content>
   <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
     <ion-list>
+    <table>
       <ion-item ng-repeat="votable in votables" href="#/app/votables/{{votable._id}}">
         <div class="container col-xs-12">
           <div class="row">
+            
+
             <div class="col-xs-9">{{votable.question}}</div>
 
             <div class="col-xs-2 text-right"><span class="glyphicon glyphicon-arrow-up"></span>{{votable.voteUp}}</div>

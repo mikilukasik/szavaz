@@ -3,7 +3,7 @@ app.factory('apiService', function($http, $filter) {
     postQuestion: function(question) {
       var req = {
         method: 'POST',
-        url: apiServer.host + ':' + apiServer.port +  '/api/questions',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions',
       
         headers: {
           'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ app.factory('apiService', function($http, $filter) {
     postPromotion: function(promotion) {
       var req = {
         method: 'POST',
-        url: apiServer.host + ':' + apiServer.port + '/api/promotions',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/promotions',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -32,7 +32,7 @@ app.factory('apiService', function($http, $filter) {
     escalateQuestion: function(questionId) {
       var req = {
         method: 'PUT',
-        url: apiServer.host + ':' + apiServer.port + '/api/questions/' + questionId,
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -44,7 +44,7 @@ app.factory('apiService', function($http, $filter) {
     postVote: function(vote) {
       var req = {
         method: 'POST',
-        url: apiServer.host + ':' + apiServer.port + '/api/votes',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/votes',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -54,10 +54,23 @@ app.factory('apiService', function($http, $filter) {
         return res.data;
       });
     },
+    getPromotables: function() {
+      var req = {
+        method: 'GET',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/promotables',
+       
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+    },
     getVotables: function() {
       var req = {
         method: 'GET',
-        url: apiServer.host + ':' + apiServer.port + '/api/questions/votables',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/votables',
        
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +83,7 @@ app.factory('apiService', function($http, $filter) {
     getQuestion: function(questionId) {
       var req = {
         method: 'GET',
-        url: apiServer.host + ':' + apiServer.port + '/api/questions/' + questionId,
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -82,7 +95,19 @@ app.factory('apiService', function($http, $filter) {
     getClientMongoId: function(hardWareId) {
       var req = {
         method: 'GET',
-        url: apiServer.host + ':' + apiServer.port + '/api/client-mongo-id/' + hardWareId,
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + hardWareId,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      return $http(req).then(function(res) {
+        return res.data;
+      });
+    },
+    checkClientMongoId: function(clientMongoId) {
+      var req = {
+        method: 'PUT',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -94,7 +119,7 @@ app.factory('apiService', function($http, $filter) {
     postClientMongoId: function(clientMongoId) {
       var req = {
         method: 'GET',
-        url: apiServer.host + ':' + apiServer.port + '/api/client-mongo-id/' + clientMongoId,
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
         headers: {
           'Content-Type': 'application/json'
         }

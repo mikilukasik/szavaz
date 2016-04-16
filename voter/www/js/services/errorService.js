@@ -1,7 +1,7 @@
-app.factory('errorService', function($http) {
+app.factory('errorService', function($rootScope, $http) {
   return {
     dealWithError: function(err) {
-      console.log('silentError:', err)
+      $rootScope.toConsole('silentError:', err)
     }
   }
 })

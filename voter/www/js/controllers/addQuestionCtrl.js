@@ -7,7 +7,7 @@ app.controller('addQuestionCtrl', function($rootScope, $scope, $filter, toastr, 
     $rootScope.spinIt = true;
     apiService.postQuestion($scope.addQuestionObj.questionInput).then(function(res) {
         $rootScope.spinIt = false;
-        console.log('Question added, response:', res);
+        $rootScope.toConsole('Question added, response:', res);
         toastr.success($filter('translate')('Question added successfully.', 'toasts', $rootScope.language));
         $scope.addQuestionObj.questionInput = ''; //clears input in view
       },

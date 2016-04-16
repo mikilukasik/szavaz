@@ -1,4 +1,4 @@
-app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService, $cordovaGeolocation) {
+app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
 
   $rootScope.language = preferredLanguage;
 
@@ -10,10 +10,105 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
   //     var lat  = position.coords.latitude
   //     var long = position.coords.longitude
 
-  //     console.log('inside getCurrentPosition',lat,long)
+  //     $rootScope.toConsole('inside getCurrentPosition',lat,long)
   //   }, function(err) {
   //     // error
   //   });
+
+  $rootScope.device = {
+    isReady : false,
+    isMobile : false,
+    isBrowser : false
+  }
+
+  $scope.getId = function () {
+
+    if ($rootScope.clientMongoId === '') {
+      $rootScope.toConsole('no clientMongoId, requesting...');
+
+      apiService.getClientMongoId('newBrowser').then(function(res) {
+        setCookie("clientId", res.clientMongoId, 365);
+        $rootScope.clientMongoId = res.clientMongoId;
+        $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
+      }, function(err) {
+        $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
+        errorService.dealWithError(err);
+      })
+
+    } else {
+      $rootScope.toConsole('clientMongoId from cookie:',$rootScope.clientMongoId);
+
+      apiService.checkClientMongoId($rootScope.clientMongoId).then(function(res) {
+        setCookie("clientId", res.clientMongoId, 365);
+        $rootScope.clientMongoId = res.clientMongoId;
+        $rootScope.toConsole('clientMongoId ok.');
+      }, function(err) {
+        $rootScope.toConsole('silentError', 'clientMongoId cookie problem, trying again as new..');
+        $rootScope.clientMongoId = ''
+        $scope.getId()
+        
+        errorService.dealWithError(err);
+      })
+
+    };
+  };
+
+  $rootScope.consoleLog = []
+  $rootScope.toConsole = function(){
+    $rootScope.consoleLog.push(arguments)
+    console.log(arguments)
+  };
+
+  $rootScope.spinIt = true;
+
+  $timeout(function() {
+
+    if(!$rootScope.device.isReady){
+
+      $rootScope.toConsole('silentError:',"Device didn't get ready in " + (new Date() - indexGlobals.appStarted) + ' seconds.');
+      $rootScope.toConsole('Treating device as browser.');
+      $rootScope.spinIt = false;
+
+      $rootScope.device.isBrowser = true;
+      $rootScope.device.isReady = true;
+
+      //f(!$rootScope.device.uuid) $rootScope.device.uuid = Math.random();       //in browser
+      $rootScope.clientMongoId = getCookie("clientId");
+
+      $scope.getId()
+
+
+    } else {
+      //mobile already initialized
+    }
+
+ 
+  }, 5000);
+
+  document.addEventListener("deviceready", function () {
+
+    $rootScope.toConsole('Device got ready in ' + (new Date() - indexGlobals.appStarted) + ' seconds.');
+
+    $rootScope.device.isMobile = true;
+    $rootScope.device.isReady = true;
+
+    $rootScope.device.deviceInfo = $cordovaDevice.getDevice();
+    $rootScope.device.cordova = $cordovaDevice.getCordova();
+    $rootScope.device.model = $cordovaDevice.getModel();
+    $rootScope.device.platform = $cordovaDevice.getPlatform();
+    $rootScope.device.uuid = $cordovaDevice.getUUID();
+    $rootScope.version = $cordovaDevice.getVersion();
+
+    $rootScope.toConsole('requesting clientMongoId...');
+    apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
+      $rootScope.clientMongoId = res.clientMongoId;
+      $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
+    }, function(err) {
+      $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
+      errorService.dealWithError(err);
+    })
+
+  }, false);
 
 
   var watchOptions = {
@@ -22,6 +117,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
   };
 
   var watch = $cordovaGeolocation.watchPosition(watchOptions);
+
   watch.then(
     null,
     function(err) {
@@ -32,10 +128,10 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
         lat : position.coords.latitude,
         long : position.coords.longitude
       }
-      console.log('$rootScope.myPosition updated',$rootScope.myPosition)
+      $rootScope.toConsole('$rootScope.myPosition updated',$rootScope.myPosition)
   });
 
-    // console.log('geoCtrl ran.')
+    // $rootScope.toConsole('geoCtrl ran.')
 
   // watch.clearWatch();
   // // OR
@@ -58,45 +154,11 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
 
 
+
+
   var hardWareId = Math.random() // 'tempId';
-  var setCookie = function(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-  }
-  var getCookie = function(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1);
-      if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-    }
-    return "";
-  }
-  $rootScope.clientMongoId = getCookie("clientId");
-  $scope.setClientMongoID = function(clientMongoId) {
-  }
-  if ($rootScope.clientMongoId === '') {
-    console.log('no clientMongoId, requesting...');
-    apiService.getClientMongoId(hardWareId).then(function(res) {
-      setCookie("clientId", res.clientMongoId, 365);
-      $rootScope.clientMongoId = res.clientMongoId;
-      console.log('clientMongoId received', $rootScope.clientMongoId);
-    }, function(err) {
-      errorService.dealWithError(err);
-    })
-  } else {
-    console.log('clientMongoId from cookie, checking', $rootScope.clientMongoId);
-    apiService.postClientMongoId($rootScope.clientMongoId).then(function(res) {
-      // setCookie("clientMongoId", res.clientMongoId, 365);
-      // $rootScope.clientMongoId = res.clientMongoId;
-      // console.log('clientMongoId received',$rootScope.clientMongoId);
-    }, function(err) {
-      errorService.dealWithError(err);
-    })
-  }
+  
+  
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -121,7 +183,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
   };
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    $rootScope.toConsole('Doing login', $scope.loginData);
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {

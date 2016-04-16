@@ -15,3 +15,15 @@ div.spinner {
   height: 85px !important;
 
 }
+
+.errorLine {
+  background: #f99;
+  
+  
+}
+
+.bordered {
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+
+}
