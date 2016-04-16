@@ -1,4 +1,4 @@
-app.factory('apiService', function($http, $filter) {
+app.factory('apiService', function($http, $filter, $rootScope) {
   return {
     // getSession: function(question) {
     //   var req = {
@@ -16,6 +16,26 @@ app.factory('apiService', function($http, $filter) {
     //     return res.data;
     //   });
     // },
+    postLogin: function(username, password) {
+      var req = {
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
+      
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          username: username,
+          password: password
+        }
+      }
+      return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
+        return res.data;
+      });
+    },
     postQuestion: function(questionHeader, question) {
       var req = {
         method: 'POST',
@@ -30,6 +50,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -43,6 +66,9 @@ app.factory('apiService', function($http, $filter) {
         data: promotion
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -55,6 +81,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -68,6 +97,9 @@ app.factory('apiService', function($http, $filter) {
         data: vote
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -81,6 +113,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -94,6 +129,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -106,6 +144,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -118,6 +159,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -130,6 +174,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     },
@@ -142,6 +189,9 @@ app.factory('apiService', function($http, $filter) {
         }
       }
       return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+        }
         return res.data;
       });
     }

@@ -83,8 +83,13 @@ gulp.task('voter', function(){
 
 gulp.task('start', ['voter'], function () {
   nodemon({
-    script: 'server.js'
-  , ext: 'js html'
-  , env: { 'NODE_ENV': 'development' }
+    script: 'server.js',
+    ext: 'js html',
+    ignore: [
+      'www/lib/',
+      'node_modules/',
+      'platforms/'
+    ],
+  env: { 'NODE_ENV': 'development' }
   })
 })

@@ -3,8 +3,10 @@ var morgan = require('morgan');
 var bodyParser = require("body-parser");
 var fs = require('fs');
 
-var http = require('http')
-var cors = require('cors')
+var http = require('http');
+var cors = require('cors');
+
+var bcrypt = require('bcrypt');
 
 
 var dbFuncs = require('./modules/dbFuncs.js')

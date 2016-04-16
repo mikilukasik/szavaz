@@ -5,6 +5,7 @@
   "dependencies": {
     "angular-spinner": "^0.8.1",
     "angular-toastr": "^1.7.0",
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "cordova-plugin-uniquedeviceid": "^1.3.2",

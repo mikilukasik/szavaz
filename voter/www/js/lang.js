@@ -14,7 +14,9 @@ var translations = {
       'Menu': 'Menu',
       'Vote': 'Vote',
       'Promote Question': 'Promote Question',
-      'Developer': 'Developer'
+      'Developer': 'Developer',
+      'Login': 'Login',
+      'Register': 'Register'
 
     },
     labels: {
@@ -27,21 +29,27 @@ var translations = {
       'NO': 'NO',
       'UP': 'UP',
       'DOWN': 'DOWN',
-      'ESCALATE': 'ESCALATE'
+      'ESCALATE': 'ESCALATE',
+
+      'Close': 'Close'
     },
     toasts: {
       'Question added successfully.': 'Question added successfully.',
 
-      'YES vote saved.': 'YES vote saved.',
-      'NO vote saved.': 'NO vote saved.',
-      'Vote changed to YES.': 'Vote changed to YES.',
-      'Vote changed to NO.': 'Vote changed to NO.',
+      "Passwords don't match.": "Passwords don't match.",
+      'User registered.': 'User registered.',
+      'Username exists.': 'Username exists.',
 
-      'Question added successfully.': 'Question added successfully.',
-      'YES promotion saved.': 'YES promotion saved.',
-      'NO promotion saved.': 'NO promotion saved.',
-      'Promotion changed to YES.': 'Promotion changed to YES.',
-      'Promotion changed to NO.': 'Promotion changed to NO.'
+      'You already promoted down this question.': 'You already promoted down this question.',
+      'You already promoted up this question.': 'You already promoted up this question.',
+      'Promotion changed to positive.': 'Promotion changed to positive.',
+      'Promotion changed to negative.': 'Promotion changed to negative.',
+
+      'You already voted NO to this question.': 'You already voted NO to this question.',
+      'You already voted YES to this question.': 'You already voted YES to this question.',
+      'Vote changed to YES.': 'Vote changed to YES.',
+      'Vote changed to NO.': 'Vote changed to NO.'
+
     }
   }
 };

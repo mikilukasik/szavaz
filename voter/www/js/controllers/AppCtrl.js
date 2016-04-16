@@ -1,4 +1,4 @@
-app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
+app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, $filter, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
 
   $rootScope.language = preferredLanguage;
 
@@ -149,7 +149,9 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
 
 
-
+  $rootScope.toastr = function(type,message) {
+    toastr[type]($filter('translate')(message, 'toasts', $rootScope.language));
+  }
 
 
 
@@ -189,7 +191,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
     $scope.loginModal.show();
   };
 
-  
+
   // Triggered in the login modal to close it
   $scope.closeLoginModal = function() {
     $scope.loginModal.hide();
@@ -208,22 +210,47 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
   // Perform the login action when the user submits the login form
   $scope.sendLogin = function() {
     $rootScope.toConsole('Doing login', $scope.loginData);
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLoginModal();
-    }, 1000);
+
+    $scope.loginData.username = undefined;
+    $scope.loginData.password = undefined;
+    $scope.closeLoginModal();
+      
   };
 
   $scope.sendRegister = function() {
-    $rootScope.toConsole('Registering', $scope.loginData);
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
+    
+    if ($scope.loginData.registerPassword === $scope.loginData.registerPassword2) {
+
+      $rootScope.toConsole('Registering', $scope.loginData);
+      apiService.postLogin($scope.loginData.registerName, $scope.loginData.registerPassword).then(function(res){
+        
+        
+
+        
+
+      },function(err){
+        errorService.dealWithError(err);
+      })
+
+      $scope.loginData.registerName = undefined;
+      $scope.loginData.registerPassword = undefined;
+      $scope.loginData.registerPassword2 = undefined;
+
+
       $scope.closeRegisterModal();
       $scope.closeLoginModal();
 
-    }, 1000);
+
+
+    } else {
+      $rootScope.toastr('error',"Passwords don't match.");
+
+
+
+    }
+    
+
+
   };
 
 
