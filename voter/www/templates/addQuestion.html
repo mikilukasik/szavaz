@@ -1,24 +1,18 @@
 <ion-view view-title="{{'Add a New Question' | translate:'titles'}}">
   <ion-content>
-    <div class="container col-xs-12">
-    <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <h2>{{'Your Question:' | translate:'labels'}}</h2> </div>
-      </div>
-      <div class="row">
-        <form ng-submit="addQuestion()">
-          <div class="input-group"> <input type="text" class="form-control" ng-model="addQuestionObj.questionInput" /> <span class="input-group-btn">
-                <button class="btn btn-default">{{'Submit' | translate:'labels'}}</button>
-              </span> </div>
-        </form>
-      </div>
-     <!--  <div class="row">
-        <div class="col-xs-12 text-center" id="toast-container"></div>
-         </div>
-       <div id="mytoast-container"> </div> 
-      </div> -->
+    <div class="spinner" style="z-index:99" ng-if="spinIt">
+      <ion-spinner icon="android"></ion-spinner>
     </div>
-    <!-- </div> -->
+    <form ng-submit="addQuestion()">
+      <div class="list"> 
+        <label class="item item-input">
+          <textarea placeholder="{{'Your Question Header:' | translate:'labels'}}" ng-model="addQuestionObj.questionHeader"></textarea>
+        </label>
+        <label class="item item-input">
+          <textarea rows="15" placeholder="{{'Your Question:' | translate:'labels'}}" ng-model="addQuestionObj.question"></textarea>
+        </label>  
+        <button class="button button-block button-positive">{{'Submit' | translate:'labels'}}</button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>

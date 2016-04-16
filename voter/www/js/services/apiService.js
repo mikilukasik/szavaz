@@ -1,6 +1,22 @@
 app.factory('apiService', function($http, $filter) {
   return {
-    postQuestion: function(question) {
+    // getSession: function(question) {
+    //   var req = {
+    //     method: 'POST',
+    //     url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions',
+      
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     data: {
+    //       question: question
+    //     }
+    //   }
+    //   return $http(req).then(function(res) {
+    //     return res.data;
+    //   });
+    // },
+    postQuestion: function(questionHeader, question) {
       var req = {
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions',
@@ -9,6 +25,7 @@ app.factory('apiService', function($http, $filter) {
           'Content-Type': 'application/json'
         },
         data: {
+          header: questionHeader,
           question: question
         }
       }

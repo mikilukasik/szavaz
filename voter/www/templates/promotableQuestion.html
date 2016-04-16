@@ -1,33 +1,24 @@
 <ion-view view-title="{{'Promote Question' | translate:'titles'}}">
   <ion-content>
-    <div class="container-fluid container-table col-xs-12">
     <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
-      <!-- <div class="row vertical-center-row"> -->
-      <div class="text-center col-xs-10 col-xs-offset-1">
-        <div class="row">
-          <div class="text-center col-xs-8 col-xs-offset-2">
-            <h1><strong>{{'Question:' | translate:'labels'}}</strong></h1> </div>
-        </div>
-        <div class="row">
-          <div class="text-center col-xs-8 col-xs-offset-2">
-            <h2>{{question.question}}</h2> </div>
-        </div>
-        <div class="row" style="height:2em"></div>
-        <div class="row" style="height:4em">
-          <div class="text-center col-xs-4 col-xs-offset-2" style="background:white"> <button type="button" class="btn btn-danger" ng-click="promote.down(question)"><span class="glyphicon glyphicon-arrow-down"> {{'DOWN' | translate:'labels'}}</button> </div>
+      <div class="row" style="min-height: 10%;">
+        <div class="col text-center">
+          <h1>{{question.header}}</h1>
 
-
-          
-    			
-
-          <div class="text-center col-xs-4 col-xs-offset-0" style="background:white"> <button type="button" class="btn btn-success" ng-click="promote.up(question)"><span class="glyphicon glyphicon-arrow-up"> {{'UP' | translate:'labels'}}</button> </div>
-        </div>
-        <div class="row" style="height:4em">
-          <div class="text-center col-xs-8 col-xs-offset-2" style="background:white"> <button type="button" class="btn btn-default" ng-click="promote.escalate(question)"><span class="glyphicon glyphicon-arrow-down"> {{'ESCALATE' | translate:'labels'}}</button> </div>
-          
         </div>
       </div>
-      <!-- </div> -->
+      <div class="row" style="min-height: 60%">
+        <textarea class="col" style="font-size: 1.3em; line-height: 1.2em">{{question.question}}</textarea>
+      </div>
+      <div class="row" style="min-height: 10%">
+        <div class="col"><button class="button button-block button-assertive" ng-click="promote.down(question)"><ion-icon name="arrow-down"></ion-icon>
+{{'DOWN' | translate:'labels'}}</button> </div>
+        <div class="col"><button class="button button-block button-balanced" ng-click="promote.up(question)"><ion-icon name="arrow-up"></ion-icon>
+{{'UP' | translate:'labels'}}</button> </div>
+      </div>
+      <div class="row" style="min-height: 10%">
+        <div class="col"><ion-icon name="star"></ion-icon><button class="button button-block button-stable" ng-click="promote.escalate(question)">{{'ESCALATE' | translate:'labels'}}</button> 
+      </div>
     </div>
   </ion-content>
 </ion-view>

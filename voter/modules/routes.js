@@ -10,7 +10,10 @@ var initRouter = function(router, app) {
   app.use('/api', router);
   router.route('/questions').post(function(req, res) {
     var question = req.body.question;
+    var header = req.body.header;
+
     dbFuncs.insert('questions', {
+      header: header,
       question: question,
       promoteUp: 0,
       promoteDown: 0,
@@ -211,6 +214,15 @@ var initRouter = function(router, app) {
       }
     })
   });
+
+  router.route('/sessions/:sessionId').get(function(req, res) {
+
+    var sessionId = req.params.sessionId;
+
+    res.json({ok:1})
+
+  });
+
 
   router.route('/client-mongo-id/:clientMongoId').put(function(req, res) {
 

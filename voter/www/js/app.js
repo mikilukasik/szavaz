@@ -4,6 +4,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'toastr', 'ngCordova']);
+var appControllers = angular.module('starter.controllers', []);
+// var appServices = angular.module('starter.services', ['ngResource'])
 
 
 app.run(function($ionicPlatform) {

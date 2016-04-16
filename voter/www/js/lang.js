@@ -19,6 +19,7 @@ var translations = {
     },
     labels: {
       'Your Question:': 'Your Question:',
+      'Your Question Header:': 'Your Question Header:',
       'Submit': 'Submit',
       'Question:': 'Question:',
 

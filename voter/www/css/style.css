@@ -27,3 +27,24 @@ div.spinner {
   border-bottom: 1px solid #000000;
 
 }
+
+/*http://stackoverflow.com/questions/32562237/how-to-fill-vertical-space-with-flexbox-in-ionic*/
+.fill-vertical-space{
+    display: -webkit-flex;
+    display: flex;
+
+    flex-direction: column;
+    background-color: green;
+
+    height: 100%;
+}
+
+.fill-vertical-space > div, .fill-vertical-space > .row{
+    -webkit-flex: 1;
+    flex: 1;
+    background-color: blue;
+}
+
+.scroll{
+    height: 100%;
+}
