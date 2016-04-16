@@ -1,0 +1,33 @@
+<ion-view view-title="{{'Developer' | translate:'titles'}}">
+  <ion-content>
+    <div class="container-fluid container-table col-xs-12">
+    <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
+      <!-- <div class="row vertical-center-row"> -->
+      	<table>
+			<tr><td><label>lat: </label></td><td>{{myPosition.lat}}</td></tr>
+			<tr><td><label>long: </label></td><td>{{myPosition.long}}</td></tr>
+
+			
+
+			<tr><td><label>uuid: </label></td><td>{{uuid}}</td></tr>
+			<tr><td><label>clientMongoId: </label></td><td>{{clientMongoId}}</td></tr>
+
+			<tr><td><label>cordova: </label></td><td>{{cordova}}</td></tr>
+			<tr><td><label>model: </label></td><td>{{model}}</td></tr>
+			<tr><td><label>platform: </label></td><td>{{platform}}</td></tr> 
+			<tr><td><label>version: </label></td><td>{{version}}</td></tr>
+
+			<tr><td><label>device:  </label></td><td>{{device}}</td></tr>
+		</table>
+		<table>
+			<tr ng-repeat="line in consoleLog" ng-class="{ errorLine : line[0] === 'silentError:'}">
+				<td ng-repeat="data in line" class="bordered">
+				{{data}}
+				</td>
+			</tr>
+		</table>
+
+
+    </div>
+  </ion-content>
+</ion-view>
