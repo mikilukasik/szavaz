@@ -4,20 +4,19 @@
       <div class="row" style="min-height: 10%;">
         <div class="col text-center">
           <h1>{{question.header}}</h1>
-
         </div>
       </div>
       <div class="row" style="min-height: 60%">
         <textarea class="col" style="font-size: 1.3em; line-height: 1.2em">{{question.question}}</textarea>
       </div>
       <div class="row" style="min-height: 10%">
-        <div class="col"><button class="button button-block button-assertive" ng-click="promote.down(question)"><ion-icon name="arrow-down"></ion-icon>
+        <div class="col"><button class="button button-block button-assertive" ng-click="promote.down(question)"><i class="icon ion-arrow-down-b"></i>
 {{'DOWN' | translate:'labels'}}</button> </div>
-        <div class="col"><button class="button button-block button-balanced" ng-click="promote.up(question)"><ion-icon name="arrow-up"></ion-icon>
+        <div class="col"><button class="button button-block button-balanced" ng-click="promote.up(question)"><i class="icon ion-arrow-up-b"></i>
 {{'UP' | translate:'labels'}}</button> </div>
       </div>
       <div class="row" style="min-height: 10%">
-        <div class="col"><ion-icon name="star"></ion-icon><button class="button button-block button-stable" ng-click="promote.escalate(question)">{{'ESCALATE' | translate:'labels'}}</button> 
+        <div class="col"><button class="button button-block button-stable" ng-click="promote.escalate(question)"><i class="ion-checkmark-round"></i> {{'ESCALATE' | translate:'labels'}}</button> 
       </div>
     </div>
   </ion-content>

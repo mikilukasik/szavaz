@@ -156,7 +156,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
 
 
-  var hardWareId = Math.random() // 'tempId';
+  //var hardWareId = Math.random() // 'tempId';
   
   
   // With the new view caching in Ionic, Controllers are only called
@@ -167,27 +167,64 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
   // });
   // Form data for the login modal
   $scope.loginData = {};
+
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
-    $scope.modal = modal;
+    $scope.loginModal = modal;
   });
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
+  
+
+  $ionicModal.fromTemplateUrl('templates/register.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.registerModal = modal;
+  });
+  
+
+
   // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
+  $scope.openLoginModal = function() {
+    $scope.loginModal.show();
   };
+
+  
+  // Triggered in the login modal to close it
+  $scope.closeLoginModal = function() {
+    $scope.loginModal.hide();
+  };
+
+
+  $scope.openRegisterModal = function() {
+    $scope.registerModal.show();
+  };
+
+  $scope.closeRegisterModal = function() {
+    $scope.registerModal.hide();
+  };
+
+
   // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
+  $scope.sendLogin = function() {
     $rootScope.toConsole('Doing login', $scope.loginData);
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {
-      $scope.closeLogin();
+      $scope.closeLoginModal();
     }, 1000);
   };
+
+  $scope.sendRegister = function() {
+    $rootScope.toConsole('Registering', $scope.loginData);
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+    $timeout(function() {
+      $scope.closeRegisterModal();
+      $scope.closeLoginModal();
+
+    }, 1000);
+  };
+
+
 })
