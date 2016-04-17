@@ -6,6 +6,8 @@ var fs = require('fs');
 var http = require('http');
 var cors = require('cors');
 
+var arrayFind = require('array.prototype.find');
+
 var bcrypt = require('bcrypt');
 
 
