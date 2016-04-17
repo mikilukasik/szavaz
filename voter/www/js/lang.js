@@ -5,6 +5,7 @@ var translations = {
       'Promote Question': 'Promote Question',
       'Vote': 'Vote',
       'Login': 'Login',
+      'Logoff': 'Logoff',
       'Developer': 'Developer'
     },
     titles: {
@@ -53,9 +54,12 @@ var translations = {
       'Successful login.': 'Successful login.',
       'Wrong username.': 'Wrong username.',
       'Wrong password.': 'Wrong password.',
-      'Question escalated.': 'Question escalated.'
+      'Question escalated.': 'Question escalated.',
 
-
+      "'YES' vote registered.": "'YES' vote registered.",
+      "'NO' vote registered.": "'NO' vote registered.",
+      'Negative promotion registered.': 'Negative promotion registered.',
+      'Positive promotion registered.': 'Positive promotion registered.'
 
     }
   }

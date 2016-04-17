@@ -21,7 +21,17 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
         isBrowser: false
     }
 
-    $scope.getId = function() {
+    $scope.getIdFromCookie = function(dontGetCookie) {
+
+        $rootScope.clientMongoId = '';
+
+        if(!dontGetCookie){
+
+          $rootScope.clientMongoId = getCookie("clientId");
+
+        }
+
+        
 
         if ($rootScope.clientMongoId === '') {
             $rootScope.toConsole('no clientMongoId, requesting...');
@@ -46,8 +56,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
                 $rootScope.toConsole('clientMongoId without login.');
             }, function(err) {
                 $rootScope.toConsole('silentError', 'clientMongoId cookie problem, trying again as new..');
-                $rootScope.clientMongoId = ''
-                $scope.getId()
+                
+                $scope.getIdFromCookie(true)
 
                 errorService.dealWithError(err);
             })
@@ -75,9 +85,9 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
             $rootScope.device.isReady = true;
 
             //f(!$rootScope.device.uuid) $rootScope.device.uuid = Math.random();       //in browser
-            $rootScope.clientMongoId = getCookie("clientId");
+            
 
-            $scope.getId()
+            $scope.getIdFromCookie()
 
 
         } else {
@@ -87,9 +97,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
     }, 5000);
 
-    document.addEventListener("deviceready", function() {
-
-        $rootScope.toConsole('Device got ready in ' + (new Date() - indexGlobals.appStarted) + ' seconds.');
+    var whenDeviceReady = function () {
+       $rootScope.toConsole('Device got ready in ' + (new Date() - indexGlobals.appStarted) + ' seconds.');
 
         $rootScope.device.isMobile = true;
         $rootScope.device.isReady = true;
@@ -101,7 +110,12 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
         $rootScope.device.uuid = $cordovaDevice.getUUID();
         $rootScope.version = $cordovaDevice.getVersion();
 
-        $rootScope.toConsole('requesting clientMongoId...');
+        $scope.getIdFromHardwareId();
+
+    };
+
+    $scope.getIdFromHardwareId = function () {
+      $rootScope.toConsole('requesting clientMongoId...');
         apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
             $rootScope.clientMongoId = res.clientMongoId;
             $rootScope.loginMode = 'hardWareId';
@@ -110,8 +124,9 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
             $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
             errorService.dealWithError(err);
         })
+    }
 
-    }, false);
+    document.addEventListener("deviceready", whenDeviceReady, false);
 
 
     var watchOptions = {
@@ -171,6 +186,20 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
     // });
     // Form data for the login modal
     $scope.loginData = {};
+
+    $scope.logoff = function(){
+      $rootScope.loginMode = undefined;
+      $rootScope.toConsole('logging off.');
+
+      if($rootScope.device.isMobile){
+        //mobile
+        $scope.getIdFromHardwareId();
+      } else {
+        //browser
+        $scope.getIdFromCookie();
+      }
+      
+    };
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {

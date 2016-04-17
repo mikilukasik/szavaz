@@ -18,8 +18,11 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="openLoginModal()">
+        <ion-item menu-close ng-click="openLoginModal()" ng-if="loginMode !== 'username'">
           {{'Login' | translate:'menu'}}
+        </ion-item> 
+        <ion-item menu-close ng-click="logoff()" ng-if="loginMode === 'username'">
+          {{'Logoff' | translate:'menu'}}
         </ion-item> 
         <ion-item menu-close href="#/app/addQuestion">
           {{'Add Question' | translate:'menu'}}

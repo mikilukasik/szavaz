@@ -120,13 +120,23 @@ module.exports = function(options) {
           if (promoting) {
             question.promoteUp++
               done(null, {
-                result: 'Positive promotion registered.'
-              })
+        toast: {
+          type: 'success',
+          text: 'Positive promotion registered.'
+        },
+        result: 'Positive promotion registered.',
+        success: true
+      })
           } else {
             question.promoteDown++
               done(null, {
-                result: 'Negative promotion registered.'
-              })
+        toast: {
+          type: 'success',
+          text: 'Negative promotion registered.'
+        },
+        result: 'Negative promotion registered.',
+        success: true
+      })
           }
         })
       }
@@ -216,13 +226,23 @@ module.exports = function(options) {
           if (voting) {
             question.voteUp++
               done(null, {
-                result: 'Positive vote registered.'
-              })
+        toast: {
+          type: 'success',
+          text: "'YES' vote registered."
+        },
+        result: "'YES' vote registered.",
+        success: true
+      })
           } else {
             question.voteDown++
               done(null, {
-                result: 'Negative vote registered.'
-              })
+        toast: {
+          type: 'success',
+          text: "'NO' vote registered."
+        },
+        result: "'NO' vote registered.",
+        success: true
+      })
           }
         })
       }

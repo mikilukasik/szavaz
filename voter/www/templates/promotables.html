@@ -3,17 +3,11 @@
   <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
     <ion-list>
       <ion-item ng-repeat="promotable in promotables" href="#/app/promotables/{{promotable._id}}">
-        <div class="container col-xs-12">
-          <div class="row">
-            <div class="col-xs-9">{{promotable.header}}</div>
-
-            <div class="col-xs-2 text-right"><span class="glyphicon glyphicon-arrow-up"></span>{{promotable.promoteUp}}</div>
-            <div class="col-xs-1 text-right"><span class="glyphicon glyphicon-arrow-down"></span>{{promotable.promoteDown}}</div>
-
-          </div>
-
+        <div class="row">
+          <div class="col-80">{{promotable.header}}</div>
+          <div class="col"><i class="icon ion-arrow-up-b"></i> {{promotable.promoteUp}}</div>
+          <div class="col"><i class="icon ion-arrow-down-b"></i> {{promotable.promoteDown}}</div>
         </div>
-
       </ion-item>
     </ion-list>
   </ion-content>
