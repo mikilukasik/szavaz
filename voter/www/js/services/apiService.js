@@ -16,7 +16,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
     //     return res.data;
     //   });
     // },
-    postLogin: function(username, password) {
+    postLogin: function(username, password) { //register
       var req = {
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
@@ -31,11 +31,34 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
     },
+
+    putLogin: function(username, password) { //login
+      var req = {
+        method: 'PUT',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
+      
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          username: username,
+          password: password
+        }
+      }
+      return $http(req).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+        }
+        return res.data;
+      });
+    },
+
+
     postQuestion: function(questionHeader, question) {
       var req = {
         method: 'POST',
@@ -51,7 +74,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -67,7 +90,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -82,7 +105,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -98,7 +121,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -114,7 +137,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -130,7 +153,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -145,7 +168,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -160,7 +183,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -175,7 +198,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });
@@ -190,7 +213,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.toastText)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
         }
         return res.data;
       });

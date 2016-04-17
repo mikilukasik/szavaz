@@ -3,6 +3,8 @@ var morgan = require('morgan');
 var bodyParser = require("body-parser");
 var fs = require('fs');
 
+var _ = require('underscore')
+
 var http = require('http');
 var cors = require('cors');
 

@@ -26,7 +26,7 @@ var initRouter = function (router, app) {
             res.json({
               toast: {
                 type: 'error',
-                toastText: 'Username exists.'
+                text: 'Username exists.'
               },
               result: 'Username exists.',
               error: true
@@ -44,7 +44,7 @@ var initRouter = function (router, app) {
                 res.json({
                   toast: {
                     type: 'success',
-                    toastText: 'User registered.'
+                    text: 'User registered.'
                   },
                   result: 'User registered.',
                   success:true
@@ -100,7 +100,7 @@ var initRouter = function (router, app) {
       dbFuncs.update('clients', {
         _id: new dbFuncs.ObjectID(clientMongoId)
       }, function (client) {
-        var existingPromotion = (client.promotions.find(function (promotion) {
+        var existingPromotion = (_.find(client.promotions, function (promotion) {
           return (promotion.questionId === questionId)
         }))
         if (existingPromotion) {
@@ -111,7 +111,7 @@ var initRouter = function (router, app) {
               res.json({
                 toast: {
                   type: 'error',
-                  toastText: 'You already promoted up this question.'
+                  text: 'You already promoted up this question.'
                 },
                 result: 'User already promoted up this question.'
               })
@@ -126,7 +126,7 @@ var initRouter = function (router, app) {
                   res.json({
                     toast: {
                       type: 'success',
-                      toastText: 'Promotion changed to negative.'
+                      text: 'Promotion changed to negative.'
                     },
                     result: 'Promotion changed to negative.'
                   })
@@ -145,7 +145,7 @@ var initRouter = function (router, app) {
                   res.json({
                     toast: {
                       type: 'success',
-                      toastText: 'Promotion changed to positive.'
+                      text: 'Promotion changed to positive.'
                     },
                     result: 'Promotion changed to positive.'
                   })
@@ -154,7 +154,7 @@ var initRouter = function (router, app) {
               res.json({
                 toast: {
                   type: 'error',
-                  toastText: 'You already promoted down this question.'
+                  text: 'You already promoted down this question.'
                 },
                 result: 'User already promoted down this question.'
               })
@@ -193,7 +193,7 @@ var initRouter = function (router, app) {
       dbFuncs.update('clients', {
         _id: new dbFuncs.ObjectID(clientMongoId)
       }, function (client) {
-        var existingVote = (client.votes.find(function (vote) {
+        var existingVote = (_.find(client.votes, function (vote) {
           return (vote.questionId === questionId)
         }))
         if (existingVote) {
@@ -205,7 +205,7 @@ var initRouter = function (router, app) {
                 
                 toast: {
                   type: 'error',
-                  toastText: 'You already voted YES to this question.'
+                  text: 'You already voted YES to this question.'
                 },
                 result: 'User already voted up this question.'
               })
@@ -220,7 +220,7 @@ var initRouter = function (router, app) {
                   res.json({
                     toast: {
                       type: 'success',
-                      toastText: 'Vote changed to NO.'
+                      text: 'Vote changed to NO.'
                     },
                     result: 'Vote changed to negative.'
                   })
@@ -239,7 +239,7 @@ var initRouter = function (router, app) {
                   res.json({
                     toast: {
                       type: 'success',
-                      toastText: 'Vote changed to YES.'
+                      text: 'Vote changed to YES.'
                     },
                     result: 'Vote changed to positive.'
                   })
@@ -248,7 +248,7 @@ var initRouter = function (router, app) {
               res.json({
                 toast: {
                   type: 'error',
-                  toastText: 'You already voted NO to this question.'
+                  text: 'You already voted NO to this question.'
                 },
                 result: 'User already voted down this question.'
               })
