@@ -8,7 +8,7 @@ var apiServer = {
 
 var apiServer = {
 	host: 'http://miki.ddns.net',
-	port: 80
+	port: 5000
 };
 
 // var uniqueDeviceID;
