@@ -16,7 +16,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
     //     return res.data;
     //   });
     // },
-    postLogin: function(username, password) { //register
+    postLogin: function(username, password, hardWareId) { //register
       var req = {
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
@@ -26,7 +26,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         },
         data: {
           username: username,
-          password: password
+          password: password,
+          hardWareId: hardWareId
         }
       }
       return $http(req).then(function(res) {

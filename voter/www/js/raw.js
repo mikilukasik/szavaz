@@ -7,9 +7,15 @@ var apiServer = {
 };
 
 var apiServer = {
-	host: 'http://miki.ddns.net',
-	port: 5000
+  host: 'http://miki.ddns.net',
+  port: 5000
 };
+
+
+// var apiServer = {
+//   host: 'http://miki.ddns.net',
+//   port: 4000
+// };
 
 // var uniqueDeviceID;
 // // Get UUID

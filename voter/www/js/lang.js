@@ -52,7 +52,8 @@ var translations = {
 
       'Successful login.': 'Successful login.',
       'Wrong username.': 'Wrong username.',
-      'Wrong password.': 'Wrong password.'
+      'Wrong password.': 'Wrong password.',
+      'Question escalated.': 'Question escalated.'
 
 
 
