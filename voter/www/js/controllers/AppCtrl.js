@@ -29,6 +29,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
             apiService.getClientMongoId('newBrowser').then(function(res) {
                 setCookie("clientId", res.clientMongoId, 365);
                 $rootScope.clientMongoId = res.clientMongoId;
+                $rootScope.loginMode = 'fresh';
                 $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
             }, function(err) {
                 $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
@@ -41,7 +42,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
             apiService.checkClientMongoId($rootScope.clientMongoId).then(function(res) {
                 setCookie("clientId", res.clientMongoId, 365);
                 $rootScope.clientMongoId = res.clientMongoId;
-                $rootScope.toConsole('clientMongoId ok.');
+                $rootScope.loginMode = 'cookie';
+                $rootScope.toConsole('clientMongoId without login.');
             }, function(err) {
                 $rootScope.toConsole('silentError', 'clientMongoId cookie problem, trying again as new..');
                 $rootScope.clientMongoId = ''
@@ -102,6 +104,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
         $rootScope.toConsole('requesting clientMongoId...');
         apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
             $rootScope.clientMongoId = res.clientMongoId;
+            $rootScope.loginMode = 'hardWareId';
             $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
         }, function(err) {
             $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
@@ -214,6 +217,12 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
         apiService.putLogin($scope.loginData.loginName, $scope.loginData.loginPassword).then(function(res) {
 
           if(res.success){
+
+            $rootScope.toConsole('Logged in, clientMongoId:', res.clientMongoId)
+
+            $rootScope.clientMongoId = res.clientMongoId;
+            $rootScope.loginMode = 'username';
+
             $scope.loginData.loginName = undefined;
             $scope.loginData.loginPassword = undefined;
             
@@ -240,8 +249,11 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
               if(res.success){
 
+                $rootScope.toConsole('Logged in, clientMongoId:', res.clientMongoId);
 
 
+                $rootScope.clientMongoId = res.clientMongoId;
+                $rootScope.loginMode = 'username';
 
                 $scope.loginData.registerName = undefined;
                 $scope.loginData.registerPassword = undefined;
