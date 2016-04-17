@@ -296,8 +296,8 @@ var initRouter = function (router, app) {
           dbFuncs.insert('clients', {
 
             hardWareId: req.params.hardWareId,
-            promotions: [],
-            votes: [],
+            promotions: [{}],
+            votes: [{}],
             preferences: {
 
             },
