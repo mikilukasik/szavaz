@@ -31,7 +31,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -52,7 +52,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -74,7 +74,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -90,7 +90,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -105,7 +105,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -121,7 +121,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -137,7 +137,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -153,7 +153,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -168,7 +168,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -183,7 +183,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -198,7 +198,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
@@ -213,7 +213,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       }
       return $http(req).then(function(res) {
         if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text)
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });

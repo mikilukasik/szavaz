@@ -11,7 +11,7 @@ var initRouter = function (router, app) {
 
   ////////////////////////  login  ///////////////////////
 
-  router.route('/login')
+  router.route('/login')      //register
     .post(function (req, res) {
        //register
       
@@ -57,17 +57,60 @@ var initRouter = function (router, app) {
     });
 
 
-        // bcrypt.compare(password, hash, function (erru, resu) {
-        //   // res === true
-        //   res.json({
-        //       username: username,
-        //       password: password,
-        //       //salt: salt,
-        //       hash: hash,
-        //       res: resu
-        //     }) //
-        // });
 
+
+  router.route('/login')    //login
+    .put(function (req, res) {
+       //register
+      
+      var username = req.body.username;
+      var password = req.body.password;
+
+      
+
+        dbFuncs.findOne('logins',{ _id: username}, function(foundDoc){
+          if(foundDoc){
+            //username exists
+
+            var hash = foundDoc.passwordHash;
+
+            bcrypt.compare(password, hash, function (erru, resu) {
+          
+              res.json({
+                toast: {
+                  type: resu ? 'success' : 'error',
+                  text: resu ? 'Successful login.' : 'Wrong password.'
+                },
+                result: resu ? 'Successful login.' : 'Wrong password.',
+                error: resu ? false : true,
+                success: resu
+              });
+
+
+
+            })
+
+
+
+          } else {
+            //user not in db
+
+            res.json({
+              toast: {
+                type: 'error',
+                text: 'Wrong username.'
+              },
+              result: 'Wrong username.',
+              error: true
+            })
+
+          };
+        });
+
+    });
+
+
+       
 
 
   //////////////  questions     /////////////////////

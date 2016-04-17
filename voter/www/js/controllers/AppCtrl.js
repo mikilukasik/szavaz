@@ -212,10 +212,15 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
 
         apiService.putLogin($scope.loginData.loginName, $scope.loginData.loginPassword).then(function(res) {
-          $scope.loginData.loginName = undefined;
-          $scope.loginData.loginPassword = undefined;
+
+          if(res.success){
+            $scope.loginData.loginName = undefined;
+            $scope.loginData.loginPassword = undefined;
+            
+            $scope.closeLoginModal();
+
+          }
           
-          $scope.closeLoginModal();
 
 
 
@@ -232,18 +237,22 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
             $rootScope.toConsole('Registering', $scope.loginData);
             apiService.postLogin($scope.loginData.registerName, $scope.loginData.registerPassword).then(function(res) {
-              $scope.loginData.registerName = undefined;
-              $scope.loginData.registerPassword = undefined;
-              $scope.loginData.registerPassword2 = undefined;
 
-
-              $scope.closeRegisterModal();
-              $scope.closeLoginModal();
+              if(res.success){
 
 
 
 
+                $scope.loginData.registerName = undefined;
+                $scope.loginData.registerPassword = undefined;
+                $scope.loginData.registerPassword2 = undefined;
 
+                $scope.closeRegisterModal();
+                $scope.closeLoginModal();
+
+              }; 
+
+              
 
 
             }, function(err) {

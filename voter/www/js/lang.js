@@ -48,7 +48,13 @@ var translations = {
       'You already voted NO to this question.': 'You already voted NO to this question.',
       'You already voted YES to this question.': 'You already voted YES to this question.',
       'Vote changed to YES.': 'Vote changed to YES.',
-      'Vote changed to NO.': 'Vote changed to NO.'
+      'Vote changed to NO.': 'Vote changed to NO.',
+
+      'Successful login.': 'Successful login.',
+      'Wrong username.': 'Wrong username.',
+      'Wrong password.': 'Wrong password.'
+
+
 
     }
   }
