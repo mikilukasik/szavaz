@@ -66,7 +66,7 @@ eval(fs.readFileSync('./modules/routes.js') + '');
 initRouter(router,app);
 
 
-var server = httpServ.listen(3000, function() {
+var server = httpServ.listen(5000, function() {
 	var host = server.address()
 		.address;
 	var port = server.address()
