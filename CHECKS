@@ -1,3 +1,2 @@
 WAIT=1
 ATTEMPTS=1
-/api/check OK
