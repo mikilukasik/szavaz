@@ -13,8 +13,7 @@ var arrayFind = require('array.prototype.find');
 var bcrypt = require('bcrypt');
 
 
-var mongocn = process.env.DOKKU_MONGO_VOTIDB_PORT_27017_TCP.replace(/tcp/,'mongodb') + '/' +
-              "votidb"
+var mongocn = process.env.DOKKU_MONGO_VOTIDB_PORT_27017_TCP.replace(/tcp/,'mongodb') + '/' + "tempdb"
 
 
 var dbFuncs = require('./modules/dbFuncs.js')
