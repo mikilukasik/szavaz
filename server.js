@@ -13,7 +13,7 @@ var arrayFind = require('array.prototype.find');
 var bcrypt = require('bcrypt');
 
 
-var mongocn = process.env.DOKKU_MONGO_VOTIDB_PORT_27017_TCP.replace('tcp://','mongodb://admin:35c45cf6e99e5273ab19c04e39957233@') + '/' + "tempdb"
+var mongocn = process.env.DOKKU_MONGO_VOTIDB_PORT_27017_TCP.replace('tcp://','mongodb://admin:35c45cf6e99e5273ab19c04e39957233@') + '/' + "votidb"
 
 console.log('mongo connection string: ',mongocn)
 
