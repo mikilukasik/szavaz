@@ -15,6 +15,7 @@ var bcrypt = require('bcrypt');
 
 var mongocn = process.env.DOKKU_MONGO_VOTIDB_PORT_27017_TCP.replace('tcp://','mongodb://admin:35c45cf6e99e5273ab19c04e39957233@') + '/' + "tempdb"
 
+console.log('mongo connection string: ',mongocn)
 
 var dbFuncs = require('./modules/dbFuncs.js')
 
