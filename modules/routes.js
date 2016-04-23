@@ -170,8 +170,9 @@ var initRouter = function(router, app) {
     });
 
   router.route('/client-mongo-id/:clientMongoId')
+ 
     .put(function(req, res) {
-
+ console.log('vmit kerdez')
       var clientMongoId = req.params.clientMongoId;
 
       dbFuncs.findOne('clients', {

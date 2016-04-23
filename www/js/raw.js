@@ -5,10 +5,10 @@ var apiServer = {
 	//port: 3000
 };
 
-var apiServer = {
-  host: 'http://miki.ddns.net',
-  port: 5000
-};
+// var apiServer = {
+//   host: 'http://miki.ddns.net',
+//   port: 5000
+// };
 
 // var apiServer = {
 //   host: 'http://miki.ddns.net',

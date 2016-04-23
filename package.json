@@ -1,4 +1,6 @@
-{
+{ "script": {
+  "start": "node seerver.js"
+},
   "name": "voter",
   "version": "1.1.1",
   "description": "voter: An Ionic project",

@@ -13,11 +13,15 @@ var arrayFind = require('array.prototype.find');
 var bcrypt = require('bcrypt');
 
 
-
+var mongocn = process.env.DOKKU_MONGO_VOTIDB_PORT_27017_TCP.replace(/tcp/,'mongodb') + '/' +
+              "votidb"
 
 
 var dbFuncs = require('./modules/dbFuncs.js')
-dbFuncs.connect('mongodb://localhost:17890/voterdb')
+
+dbFuncs.connect(mongocn)
+
+
 var app = express()
 
 var httpServ = http.createServer(app)
