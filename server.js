@@ -71,5 +71,7 @@ var server = httpServ.listen(5000, function() {
 		.address;
 	var port = server.address()
 		.port;
-	console.log('app listening at http://%s:%s', host, port);
+	console.log('server.js started, listening at http://%s:%s', host, port);
 });
+
+
