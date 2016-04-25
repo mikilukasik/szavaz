@@ -57,6 +57,7 @@ module.exports = function(options) {
           },
           result: 'Client not in DB.'
         })
+        return;
       }
 
       var existingPromotion = (_.find(client.promotions, function(promotion) {
@@ -173,6 +174,7 @@ module.exports = function(options) {
           },
           result: 'Client not in DB.'
         })
+        return;
       }
 
       var existingVote = (_.find(client.votes, function(vote) {
