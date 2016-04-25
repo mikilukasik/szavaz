@@ -59,7 +59,9 @@ var translations = {
       "'YES' vote registered.": "'YES' vote registered.",
       "'NO' vote registered.": "'NO' vote registered.",
       'Negative promotion registered.': 'Negative promotion registered.',
-      'Positive promotion registered.': 'Positive promotion registered.'
+      'Positive promotion registered.': 'Positive promotion registered.',
+
+      'Client not in DB.': 'Client not in DB.'
 
     }
   }

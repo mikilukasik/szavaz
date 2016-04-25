@@ -48,6 +48,17 @@ module.exports = function(options) {
     dbFuncs.update('clients', {
       _id: new dbFuncs.ObjectID(clientMongoId)
     }, function(client) {
+
+      if(!client){
+        done(null, {
+          toast: {
+            type: 'error',
+            text: 'Client not in DB.'
+          },
+          result: 'Client not in DB.'
+        })
+      }
+
       var existingPromotion = (_.find(client.promotions, function(promotion) {
         return (promotion.questionId === questionId)
       }))
@@ -153,6 +164,17 @@ module.exports = function(options) {
     dbFuncs.update('clients', {
       _id: new dbFuncs.ObjectID(clientMongoId)
     }, function(client) {
+
+      if(!client){
+        done(null, {
+          toast: {
+            type: 'error',
+            text: 'Client not in DB.'
+          },
+          result: 'Client not in DB.'
+        })
+      }
+
       var existingVote = (_.find(client.votes, function(vote) {
         return (vote.questionId === questionId)
       }))
