@@ -1,76 +1,114 @@
-var canIDoServices = function (params) {		//class
+var canIDoServices = function(params) { //class
 
-	this.clientMongoId = params.clientMongoId;
-	this.questionId = params.questionId
-	
-	this.previousVoteChecked = false;
-	this.previousPromotionChecked = false;
+  var services = this;
 
-	this.previousVote = '';				//	'yes' or 'no' or ''
-	this.previousPromotion = '';	//	'up' or 'down' or ''
+  this.clientMongoId = new dbFuncs.ObjectId( params.clientMongoId );
+  this.questionId = new dbFuncs.ObjectId( params.questionId );
 
-	this.checkPreviousVote = function () {
-		if (previousVoteChecked) return;
-		//TODO: check previous vote with seneca
+  this.client = params.client;        //normally undefined
+  this.question = params.question;
 
-	};
-	this.checkPreviousPromotion = function () {
-		if (previousPromotionChecked) return;
-		//TODO: check previous promotion with seneca
+  this.getQuestion = function() {
+    return new Promise(function(resolve, reject) {
+      dbFuncs.findOne('questions', {
+        _id = this.questionId
+      }, function(questionDoc) {
+        this.question = questionDoc;
+        resolve();
+      });
+    });
+  };
+  this.getClient = function() {
+    return new Promise(function(resolve, reject) {
+      dbFuncs.findOne('clients', {
+        _id = new this.clientMongoId
+      }, function(clientDoc) {
+        this.client = clientDoc;
+        resolve();
+      });
+    });
+  };
 
-	};
+  this.previousVote = function() {
+    
+    var previousVote = _.find(clientDoc.votes,function(vote){ return vote.questionId === this.questionId });
+    if (previousVote){
 
+      switch (previousVote.voting) {
+        case true: return 'yes';
+        case false: return 'no';
+      };
+      
+    }
+    
+  };
+  this.previousPromotion: function() {
+   
+    var previousPromotion = _.find(clientDoc.promotions,function(promotion){ return promotion.questionId === this.questionId });
+    if (previousPromotion){
 
-  this.alreadyVoted: {
-  	yes: function () {
-  		this.checkPreviousVote();
-  		return this.previousVote === 'yes';
-  	},
-  	no: function () {
-  		this.checkPreviousVote();
-  		return this.previousVote === 'no';
+      switch (previousPromotion.promoting) {
+        case true: return 'up';
+        case false: return 'down';
+      };
+      
+    }
+   
+  };
 
-  	}
+  this.alreadyVotedYes: function() {
+    return services.previousVote === 'yes';
+  };
+  this.alreadyVotedNo: function() {
+    return services.previousVote === 'no';
+  };
+  
+  this.alreadyPromotedUp: function() {
+    return services.previousPromotion === 'up';
+  };
+  this.alreadyPromotedDown: function() {
+    return services.previousPromotion === 'down';
+  };
+  this.hasEnoughUserLevelToVoteYes: function() {
+
+  };
+  this.hasEnoughUserLevelToVoteNo: function() {
+
+  };
+  this.hasEnoughUserLevelToPromoteUp: function() {
+
+  };
+  this.hasEnoughUserLevelToPromoteDown: function() {
+
+  };
+  this.hasEnoughUserLevelToPostQuestion: function() {
+
+  };
+  this.hasEnoughUserLevelToRemoveQuestion: function() {
+
+  };
+  this.hasEnoughUserLevelToForceEscalateQuestion: function() {
+
+  };
+  this.hasEnoughCreditToVoteYes: function() {
+
+  };
+  this.hasEnoughCreditToVoteNo: function() {
+
+  };
+  this.hasEnoughCreditToPromoteUp: function() {
+
+  };
+  this.hasEnoughCreditToPromoteDown: function() {
+
+  };
+  this.hasEnoughCreditToPostQuestion: function() {
+
+  };
+  this.hasEnoughCreditToRemoveQuestion: function() {
+
+  };
+  this.hasEnoughCreditToForceEscalateQuestion: function() {
+
   }
-
-  this.alreadyPromoted: {
-  	up: function () {
-  		this.checkPreviousPromotion();
-  		return this.previousPromotion === 'up';
-  		
-  	},
-  	down: function () {
-  		this.checkPreviousPromotion();
-  		return this.previousPromotion === 'down';
-  		
-  	}
-  },
-
-  this.hasEnoughCredit: {
-  	toVote: {
-  		yes: function () {},
-  		no: function () {},
-  	},
-  	toPromote: {
-  		up: function () {},
-  		down: function () {},
-  	},
-  	toPostNewQuestion: function () {},
-  	toRemoveQuestion: function () {}
-  },
-
-  this.hasEnoughUserLevel: {
-  	toVote: {
-  		yes: function () {},
-  		no: function () {},
-  	},
-  	toPromote: {
-  		up: function () {},
-  		down: function () {},
-  	},
-  	toPostNewQuestion: function () {},
-  	toRemoveQuestion: function () {}
-  }
-
-
 }
