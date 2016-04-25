@@ -50,7 +50,7 @@ var rules = {
 
       canIDo: function(services) {
 
-        return !services.alreadyVoted.yes() && services.hasEnoughCredit.toVote.yes() && services.hasEnoughUserLevel.toVote.yes()
+        return !services.alreadyVotedYes()// && services.hasEnoughCredit.toVote.yes() && services.hasEnoughUserLevel.toVote.yes()
 
       }
 
@@ -75,7 +75,7 @@ var rules = {
 
       canIDo: function(services) {
 
-        return !services.alreadyVoted.no() && services.hasEnoughCredit.toVote.no() && services.hasEnoughUserLevel.toVote.no()
+        return !services.alreadyVotedNo()// && services.hasEnoughCredit.toVote.no() && services.hasEnoughUserLevel.toVote.no()
 
       }
 
@@ -100,7 +100,7 @@ var rules = {
 
       canIDo: function(services) {
 
-        return !services.alreadyPromoted.up() && services.hasEnoughCredit.toPromote.up() && services.hasEnoughUserLevel.toPromote.up()
+        return !services.alreadyPromotedUp()// && services.hasEnoughCredit.toPromote.up() && services.hasEnoughUserLevel.toPromote.up()
 
       }
 
@@ -125,7 +125,7 @@ var rules = {
 
       canIDo: function(services) {
 
-        return !services.alreadyPromoted.down() && services.hasEnoughCredit.toPromote.down() && services.hasEnoughUserLevel.toPromote.down()
+        return !services.alreadyPromotedDown()// && services.hasEnoughCredit.toPromote.down() && services.hasEnoughUserLevel.toPromote.down()
 
       }
 
@@ -218,3 +218,5 @@ var rules = {
 
   }
 }
+
+module.exports = rules;

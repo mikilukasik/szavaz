@@ -1,6 +1,11 @@
-module.exports = function(options) {
-  dbFuncs = options.dbFuncs;
-  _ = options._
+module.exports = function(libs) {
+
+  var dbFuncs = libs.dbFuncs;
+  var _ = libs._;
+  var rules = libs.rules;
+  var CanIDoServices = libs.CanIDoServices;
+  var bcrypt = libs.bcrypt; 
+
 
   var seneca = this;
 
@@ -44,6 +49,17 @@ module.exports = function(options) {
     var questionId = req.body.questionId;
     var clientMongoId = req.body.clientMongoId;
     var promoting = req.body.promoting;
+
+    console.log('///////////////////////////////test starts////////////////////////////////////')
+    
+    var canIDoServices = new CanIDoServices({ questionId: questionId, clientMongoId: clientMongoId})
+    
+    canIDoServices.loadData().then(function(){
+      console.log('question loaded :', canIDoServices.question, 'client loaded: ' , canIDoServices.client)
+    })
+    console.log('///////////////////////////////test ends////////////////////////////////////')
+
+
 
     dbFuncs.update('clients', {
       _id: new dbFuncs.ObjectID(clientMongoId)

@@ -106,6 +106,7 @@ var exportThis = {
     //mongodb.connect(cn, function(err, dbGlobals.db) {
     if (dbGlobals.db) {
       dbGlobals.db.collection(collectionName).findOne(query, function(err, doc) {
+        if(err) console.log('findOne error:', err)
         cb(doc)
           //dbGlobals.db.close()
       })

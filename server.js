@@ -8,8 +8,6 @@ var _ = require('underscore')
 var http = require('http');
 var cors = require('cors');
 
-var arrayFind = require('array.prototype.find');
-
 var bcrypt = require('bcrypt');
 
 
@@ -19,6 +17,14 @@ var mongocn = process.env.MONGO_URL || "mongodb://localhost:27017/votidb";
 console.log('mongo connection string: ',mongocn)
 
 var dbFuncs = require('./modules/dbFuncs.js')
+
+var CanIDoServices = require('./modules/canIDoServices.js')({
+	_: _,
+	dbFuncs: dbFuncs
+})
+
+var rules = require('./modules/rules.js')
+
 
 dbFuncs.connect(mongocn)
 
@@ -42,21 +48,17 @@ var router = express.Router()
 
 var seneca = require('seneca')();
 
-seneca.use('./modules/loginActions.js',{
+var libs = {
 	dbFuncs: dbFuncs,
-	bcrypt: bcrypt
-});
+	_: _,
+	bcrypt: bcrypt,
+	CanIDoServices: CanIDoServices,
+	rules: rules
+}
 
-seneca.use('./modules/voteActions.js',{
-	dbFuncs: dbFuncs,
-	_: _
-});
-
-
-seneca.use('./modules/idActions.js',{
-	dbFuncs: dbFuncs,
-	_: _
-});
+seneca.use('./modules/loginActions.js', libs);
+seneca.use('./modules/voteActions.js', libs);
+//seneca.use('./modules/idActions.js', libs);
 
 
 

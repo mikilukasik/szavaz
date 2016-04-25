@@ -1,6 +1,10 @@
-module.exports = function(options) {
-  dbFuncs = options.dbFuncs;
-  bcrypt = options.bcrypt;
+module.exports = function(libs) {
+
+  var dbFuncs = libs.dbFuncs;
+  var _ = libs._;
+  var rules = libs.rules;
+  var CanIDoServices = libs.CanIDoServices;
+  var bcrypt = libs.bcrypt; 
 
   var seneca = this;
 
