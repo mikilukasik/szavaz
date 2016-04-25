@@ -1,7 +1,7 @@
 var preferredLanguage = 'en';
 
 var apiServer = {
-	host: 'http://votey.dokku.jay.li/'
+	host: 'http://votey.dokku.jay.li'
 	//port: 3000
 };
 
